@@ -23,15 +23,11 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
-            steps {
-                container('docker') {
-                    dir('app') {
-                        sh 'docker version'
-                        sh 'docker build -t springboot-demo:v1 .'
-                    }
-                }
-            }
+        stage('Docker Check') {
+    steps {
+        container('docker') {
+            sh 'docker version'
+            sh 'docker info'
         }
     }
 }
