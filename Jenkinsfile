@@ -22,5 +22,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Build') {
+            steps {
+                container('docker') {
+                    dir('app') {
+                        sh 'docker version'
+                        sh 'docker build -t springboot-demo:v1 .'
+                    }
+                }
+            }
+        }
     }
 }
