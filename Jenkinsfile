@@ -1,33 +1,18 @@
 pipeline {
-
     agent {
         label 'maven-docker'
     }
 
     stages {
 
-        stage('Checkout') {
+        stage('Docker Test') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Build') {
-            steps {
-                container('maven') {
-                    dir('app') {
-                        sh 'chmod +x mvnw'
-                        sh './mvnw clean package'
-                    }
+                container('docker') {
+                    sh 'docker version'
+                    sh 'docker info'
                 }
             }
         }
 
-        stage('Docker Check') {
-    steps {
-        container('docker') {
-            sh 'docker version'
-            sh 'docker info'
-        }
     }
 }
