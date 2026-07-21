@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        label 'maven-docker'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                container('maven') {
+                    dir('app') {
+                        sh './mvnw clean package'
+                    }
+                }
+            }
+        }
+    }
+}
