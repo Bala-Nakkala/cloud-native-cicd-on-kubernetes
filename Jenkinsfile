@@ -19,7 +19,18 @@ pipeline {
                 container('maven') {
                     sh '''
                         cd app
-                        ./mvnw clean package
+                        ./mvnw clean compile
+                    '''
+                }
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                container('maven') {
+                    sh '''
+                        cd app
+                        ./mvnw test
                     '''
                 }
             }
