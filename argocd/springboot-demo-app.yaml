@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: springboot-demo
+
+spec:
+
+  project: default
+
+  source:
+    repoURL: https://github.com/Bala-Nakkala/cloud-native-cicd-on-kubernetes.git
+    targetRevision: main
+    path: helm/springboot-demo
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: jenkins
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
