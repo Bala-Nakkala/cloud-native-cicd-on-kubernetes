@@ -35,5 +35,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Trivy Filesystem Scan') {
+            steps {
+                container('trivy') {
+                    sh '''
+                        trivy fs app/
+                    '''
+                }
+            }
+        }
     }
 }
