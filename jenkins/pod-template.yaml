@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Pod
+
+spec:
+  serviceAccountName: default
+
+  volumes:
+    - name: workspace-volume
+      emptyDir: {}
+
+    - name: docker-config
+      secret:
+        secretName: dockerhub-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+
+  containers:
+
+    - name: jnlp
+      image: jenkins/inbound-agent:latest
+      workingDir: /home/jenkins/agent
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /home/jenkins/agent
+
+    - name: maven
+      image: maven:3.9.11-eclipse-temurin-17
+      command:
+        - sleep
+      args:
+        - "99d"
+      tty: true
+      workingDir: /home/jenkins/agent
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /home/jenkins/agent
+
+    - name: kubectl
+      image: bitnami/kubectl:latest
+      command:
+        - sleep
+      args:
+        - "99d"
+      tty: true
+      workingDir: /home/jenkins/agent
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /home/jenkins/agent
+
+    - name: helm
+      image: alpine/helm:3.17.3
+      command:
+        - sleep
+      args:
+        - "99d"
+      tty: true
+      workingDir: /home/jenkins/agent
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /home/jenkins/agent
+
+    - name: trivy
+      image: aquasec/trivy:latest
+      command:
+        - sleep
+      args:
+        - "99d"
+      tty: true
+      workingDir: /home/jenkins/agent
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /home/jenkins/agent
+
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:debug
+      command:
+        - sleep
+      args:
+        - "99d"
+      tty: true
+      workingDir: /home/jenkins/agent
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /home/jenkins/agent
+        - name: docker-config
+          mountPath: /kaniko/.docker
