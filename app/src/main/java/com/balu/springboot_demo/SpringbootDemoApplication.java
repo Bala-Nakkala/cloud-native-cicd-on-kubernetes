@@ -1,18 +1,13 @@
 package com.balu.springboot_demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@RestController
-public class HelloController {
+@SpringBootApplication
+public class SpringbootDemoApplication {
 
-    @GetMapping("/")
-    public String home() {
-        return "Hello from Spring Boot!";
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootDemoApplication.class, args);
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello from Spring Boot!";
-    }
 }
