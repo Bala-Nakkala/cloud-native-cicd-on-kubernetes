@@ -37,13 +37,20 @@ pipeline {
         }
 
         stage('Trivy Filesystem Scan') {
-            steps {
-                container('trivy') {
-                    sh '''
-                        trivy fs app/
-                    '''
-                }
-            }
+    steps {
+        container('maven') {
+            sh '''
+                cd app
+                ./mvnw dependency:resolve
+            '''
+        }
+
+        container('trivy') {
+            sh '''
+                trivy fs \
+                --scanners vuln \
+                app/
+            '''
         }
     }
 }
