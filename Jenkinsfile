@@ -8,29 +8,20 @@ pipeline {
 
     stages {
 
-        stage('Verify Agent') {
+        stage('Checkout') {
             steps {
+                checkout scm
+            }
+        }
 
+        stage('Build') {
+            steps {
                 container('maven') {
-                    sh 'mvn -version'
+                    sh '''
+                        cd app
+                        ./mvnw clean package
+                    '''
                 }
-
-                container('kubectl') {
-                    sh 'kubectl version --client'
-                }
-
-                container('helm') {
-                    sh 'helm version'
-                }
-
-                container('trivy') {
-                    sh 'trivy --version'
-                }
-
-                container('kaniko') {
-                    sh 'ls -la /kaniko'
-                }
-
             }
         }
     }
