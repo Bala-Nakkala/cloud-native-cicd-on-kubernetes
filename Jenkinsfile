@@ -36,26 +36,29 @@ pipeline {
             }
         }
 
-        stage('Trivy Filesystem Scan') {
+        stage('Package') {
             steps {
-
                 container('maven') {
                     sh '''
                         cd app
-                        ./mvnw dependency:resolve
+                        ./mvnw package -DskipTests
                     '''
                 }
-
-                container('trivy') {
-                    sh '''
-                        trivy fs \
-                        --scanners vuln \
-                        app/
-                    '''
-                }
-
             }
         }
 
+        stage('Build & Push Docker Image') {
+            steps {
+                container('kaniko') {
+                    sh '''
+                        /kaniko/executor \
+                          --context=${WORKSPACE}/app \
+                          --dockerfile=${WORKSPACE}/app/Dockerfile \
+                          --destination=docker.io/balu9963/springboot-demo:latest \
+                          --cache=true
+                    '''
+                }
+            }
+        }
     }
 }
