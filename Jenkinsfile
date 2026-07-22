@@ -1,52 +1,37 @@
 pipeline {
     agent {
-        label 'maven-docker'
-    }
-
-    environment {
-        IMAGE_NAME = "balu9963/springboot-demo"
-        IMAGE_TAG = "${BUILD_NUMBER}"
+        kubernetes {
+            yamlFile 'jenkins/pod-template.yaml'
+            defaultContainer 'maven'
+        }
     }
 
     stages {
 
-        stage('Checkout') {
+        stage('Verify Agent') {
             steps {
-                checkout scm
-            }
-        }
 
-        stage('Build JAR') {
-            steps {
                 container('maven') {
-                    dir('app') {
-                        sh 'mvn clean package -DskipTests'
-                    }
+                    sh 'mvn -version'
                 }
-            }
-        }
 
-        stage('Build & Push Image') {
-            steps {
+                container('kubectl') {
+                    sh 'kubectl version --client'
+                }
+
+                container('helm') {
+                    sh 'helm version'
+                }
+
+                container('trivy') {
+                    sh 'trivy --version'
+                }
+
                 container('kaniko') {
-                    sh '''
-                    /kaniko/executor \
-                      --dockerfile=$WORKSPACE/app/Dockerfile \
-                      --context=$WORKSPACE/app \
-                      --destination=$IMAGE_NAME:$IMAGE_TAG
-                    '''
+                    sh 'ls -la /kaniko'
                 }
+
             }
-        }
-
-    }
-
-    post {
-        success {
-            echo "Image pushed successfully: ${IMAGE_NAME}:${IMAGE_TAG}"
-        }
-        failure {
-            echo "Pipeline failed!"
         }
     }
 }
