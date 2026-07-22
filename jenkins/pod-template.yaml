@@ -17,13 +17,6 @@ spec:
 
   containers:
 
-    - name: jnlp
-      image: jenkins/inbound-agent:latest
-      workingDir: /home/jenkins/agent
-      volumeMounts:
-        - name: workspace-volume
-          mountPath: /home/jenkins/agent
-
     - name: maven
       image: maven:3.9.11-eclipse-temurin-17
       command:
