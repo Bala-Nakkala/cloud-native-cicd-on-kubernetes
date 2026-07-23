@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
-
     @ResponseBody
     @GetMapping(value = "/hello", produces = "text/html")
     public String hello() {
@@ -92,57 +87,38 @@ public class HelloController {
             <h1>🚀 DevOps Engineer</h1>
 
             <p>
-                A DevOps Engineer bridges the gap between Software Development and IT Operations
-                by automating application delivery, infrastructure provisioning, monitoring,
-                deployment, and production support.
+                A DevOps Engineer bridges the gap between Software Development and IT Operations by automating application delivery, infrastructure provisioning, monitoring, deployment and production support.
             </p>
 
             <h2>Roles & Responsibilities</h2>
 
             <ul>
-                <li>✅ Build and maintain CI/CD pipelines using Jenkins and GitHub.</li>
-
+                <li>✅ Build and maintain CI/CD Pipelines using Jenkins and GitHub.</li>
                 <li>✅ Containerize applications using Docker and Kaniko.</li>
-
                 <li>✅ Deploy and manage applications on Kubernetes.</li>
-
                 <li>✅ Implement GitOps Continuous Delivery using Argo CD.</li>
-
-                <li>✅ Provision cloud infrastructure using Terraform.</li>
-
-                <li>✅ Automate server configuration using Ansible.</li>
-
+                <li>✅ Provision Cloud Infrastructure using Terraform.</li>
+                <li>✅ Automate Server Configuration using Ansible.</li>
                 <li>✅ Monitor applications using Prometheus and Grafana.</li>
-
-                <li>✅ Analyze logs and troubleshoot production issues.</li>
-
-                <li>✅ Ensure application reliability, scalability, and security.</li>
-
-                <li>✅ Collaborate with Developers, QA Engineers, and Operations teams.</li>
+                <li>✅ Analyze Logs and troubleshoot Production Issues.</li>
+                <li>✅ Ensure High Availability, Scalability and Security.</li>
+                <li>✅ Collaborate with Developers, QA and Operations Teams.</li>
             </ul>
 
             <h2>Daily Activities</h2>
 
             <ul>
-                <li>✔ Review GitHub Pull Requests</li>
-
+                <li>✔ Review Pull Requests</li>
                 <li>✔ Build CI/CD Pipelines</li>
-
                 <li>✔ Build & Push Docker Images</li>
-
                 <li>✔ Deploy Applications to Kubernetes</li>
-
                 <li>✔ Monitor Production Environments</li>
-
                 <li>✔ Resolve Production Incidents</li>
-
                 <li>✔ Improve Automation & Deployment Processes</li>
             </ul>
 
             <div class="quote">
-
                 "Automate Everything. Deploy with Confidence."
-
             </div>
 
             <a href="/">⬅ Back to Dashboard</a>
