@@ -8,6 +8,22 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "🚀 Hello from DevOps CI/CD Pipeline!";
+
+        return """
+        DevOps Engineer Responsibilities
+
+        • Build CI/CD Pipelines
+        • Containerize Applications
+        • Kubernetes Administration
+        • GitOps using Argo CD
+        • Infrastructure as Code
+        • Monitoring & Logging
+        • Cloud Automation
+        • Production Troubleshooting
+
+        "Automate Everything."
+        """;
+
     }
+
 }
