@@ -1,0 +1,17 @@
+controller:
+
+  admin:
+    username: admin
+    password: admin123
+
+  serviceType: NodePort
+
+  installPlugins:
+    - kubernetes
+    - workflow-aggregator
+    - git
+    - docker-workflow
+
+  persistence:
+    enabled: true
+    size: 8Gi
