@@ -5,13 +5,15 @@ metadata:
   name: springboot-demo-service
   namespace: jenkins
 
+  labels:
+    app: springboot-demo
+
 spec:
 
   selector:
     app: springboot-demo
 
   ports:
-
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
 
