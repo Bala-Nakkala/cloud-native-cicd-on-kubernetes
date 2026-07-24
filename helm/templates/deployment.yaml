@@ -28,7 +28,8 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
 
         ports:
-        - containerPort: {{ .Values.service.targetPort }}
+          - name: http
+            containerPort: {{ .Values.service.targetPort }}
 
         resources:
 {{ toYaml .Values.resources | indent 10 }}
