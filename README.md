@@ -1,4 +1,4 @@
-# 🚀 Cloud Native CI/CD on Kubernetes
+#  Cloud Native CI/CD on Kubernetes
 
 ## Project Overview
 
