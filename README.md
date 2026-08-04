@@ -555,29 +555,3 @@ argocd app sync
 ✔ Docker
 
 ✔ Production Ready Architecture
-#################################################################
-
-                    GitHub
-                       │
-                 Webhook Trigger
-                       │
-                       ▼
-             Jenkins Controller
-             (Always Running)
-                       │
-        Kubernetes Plugin Requests
-                       │
-                       ▼
-                Kubernetes API
-                       │
-       ---------------------------------
-       │              │               │
-       ▼              ▼               ▼
-   Agent Pod      Agent Pod       Agent Pod
-     Build 1        Build 2         Build 3
-       │              │               │
-   Maven          Maven          Maven
-   Kaniko         Kaniko         Kaniko
-       │              │               │
-       ▼              ▼               ▼
- DockerHub/ECR   DockerHub/ECR   DockerHub/ECR
